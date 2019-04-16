@@ -1,0 +1,1 @@
+var $editor={show:function(){alert("hello editor!")}};$(function(){$editor.show()});
