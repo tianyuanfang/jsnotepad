@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     cssmin: {
       files: {   
         expand: true,
-        src: ['[0-9]-*/*.css'],
+        src: ['[0-9]-*/*.css','css/*.css'],
         dest: 'dist/'
       }
     },
@@ -48,7 +48,17 @@ module.exports = function (grunt) {
         '!./dist/**/*.js',
         '!./node_modules/**/*.js',
       ]
-    }
+    },
+    imagemin: {                               
+      dynamic: {
+        files: [{
+          expand: true,
+            cwd: './images',
+            src: ['**/*.{png,jpg,gif}'],
+            dest: 'dist/'                                       
+        }]                
+      }
+    }        
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -57,6 +67,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-htmlhint');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   grunt.registerTask('lint', ['htmlhint', 'csslint', 'eslint']);
   grunt.registerTask('build', ['htmlmin', 'cssmin', 'uglify']);
